@@ -1,4 +1,4 @@
-package com.zup.vehicleapi;
+package com.cadu.vehicleapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

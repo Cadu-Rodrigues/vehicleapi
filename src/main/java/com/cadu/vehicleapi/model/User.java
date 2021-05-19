@@ -1,4 +1,4 @@
-package com.zup.vehicleapi.model;
+package com.cadu.vehicleapi.model;
 
 import java.time.LocalDate;
 
