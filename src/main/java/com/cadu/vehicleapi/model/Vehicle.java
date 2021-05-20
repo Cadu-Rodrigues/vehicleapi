@@ -5,7 +5,7 @@ public class Vehicle {
     public String model;
     public int year;
     public long value;
-    private int ownerCPF;
+    public int ownerCPF;
 
     public Vehicle(String brand, String model, int year, long value, int ownerCPF) {
         this.brand = brand;
