@@ -1,22 +1,30 @@
 package com.cadu.vehicleapi.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Vehicles")
 public class Vehicle {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public long id;
     public String brand;
     public String model;
     public int year;
     public long value;
-    public int ownerCPF;
+    @ManyToOne
+    public User owner;
 
     public Vehicle(String brand, String model, int year, long value, int ownerCPF) {
         this.brand = brand;
         this.model = model;
         this.year = year;
         this.value = value;
-        this.ownerCPF = ownerCPF;
-    }
-
-    public int getOwnerCpf() {
-        return this.ownerCPF;
     }
 
 }
