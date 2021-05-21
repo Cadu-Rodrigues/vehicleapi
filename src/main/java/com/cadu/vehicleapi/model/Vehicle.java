@@ -20,11 +20,7 @@ public class Vehicle {
     @ManyToOne
     public User owner;
 
-    public Vehicle(String brand, String model, int year, long value, int ownerCPF) {
-        this.brand = brand;
-        this.model = model;
-        this.year = year;
-        this.value = value;
+    public Vehicle() {
     }
 
 }
