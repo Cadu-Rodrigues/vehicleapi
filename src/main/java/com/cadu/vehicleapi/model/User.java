@@ -23,10 +23,7 @@ public class User {
     @OneToMany(mappedBy = "owner")
     public List<Vehicle> vehicles;
 
-    public User(String name, String email, int CPF, LocalDate birthDate) {
-        this.name = name;
-        this.email = email;
-        this.CPF = CPF;
-        this.birthDate = birthDate;
+    public User() {
+
     }
 }

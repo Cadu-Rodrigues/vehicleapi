@@ -1,5 +1,6 @@
 package com.cadu.vehicleapi.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,16 +10,17 @@ import java.util.List;
 
 import com.cadu.vehicleapi.controller.DTO.UserDTO;
 import com.cadu.vehicleapi.model.User;
+import com.cadu.vehicleapi.repository.UsersRepository;
 
 @RestController
 public class UsersController {
+    @Autowired
+    private UsersRepository repository;
 
     @GetMapping("/users")
     public List<UserDTO> listUsers() {
+        List<User> users = repository.findAll();
         UserDTO dto = new UserDTO();
-        User user = new User("Carlos", "CarlosEmail@email.com", 1234, LocalDate.now());
-        User user2 = new User("Robson", "RobsonEmail@email.com", 4321, LocalDate.now());
-        User user3 = new User("Amadeu", "AmadeuEmail@email.com", 3333, LocalDate.now());
-        return dto.convert(Arrays.asList(user, user2, user3));
+        return dto.convert(users);
     }
 }
