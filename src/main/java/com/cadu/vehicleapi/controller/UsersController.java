@@ -29,7 +29,7 @@ public class UsersController {
     }
 
     @PostMapping("/users")
-    public ResponseEntity<UserDTO> cadastrar(@RequestBody UserForm form, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<UserDTO> createUser(@RequestBody UserForm form, UriComponentsBuilder uriBuilder) {
         User user = form.convert(form);
         this.repository.save(user);
         URI uri = uriBuilder.path("/users/{id}").buildAndExpand(user.id).toUri();
