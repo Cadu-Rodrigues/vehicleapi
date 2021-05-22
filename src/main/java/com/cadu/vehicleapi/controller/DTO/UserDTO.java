@@ -12,6 +12,17 @@ public class UserDTO {
     private int CPF;
     public LocalDate birthDate;
 
+    public UserDTO(User user) {
+        this.name = user.name;
+        this.email = user.email;
+        this.CPF = user.CPF;
+        this.birthDate = user.birthDate;
+    }
+
+    public UserDTO() {
+
+    }
+
     public List<UserDTO> convert(List<User> vehicles) {
         List<UserDTO> array = new ArrayList<UserDTO>();
         for (int i = 0; i < vehicles.size(); i++) {
