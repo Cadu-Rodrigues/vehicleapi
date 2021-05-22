@@ -14,8 +14,8 @@ CREATE TABLE Vehicles (
     id INT AUTO_INCREMENT PRIMARY KEY,
     Brand VARCHAR(250),
     Model VARCHAR(250),
-    Year INT(4),
-    Value DECIMAL,
+    Year VARCHAR(250),
+    Value VARCHAR(250),
     Owner_id INT
 );
 
@@ -52,14 +52,32 @@ VALUES
 INSERT INTO
     Vehicles (Brand, Model, Year, Value, Owner_id)
 VALUES
-    ('Ford', 'Fiesta', 2009, 10000, 1);
+    (
+        'Ford',
+        'Fiesta 1.6 16V Flex Aut. 5p',
+        '2016 Gasolina',
+        '10000',
+        1
+    );
 
 INSERT INTO
     Vehicles (Brand, Model, Year, Value, Owner_id)
 VALUES
-    ('Ford', 'Fusion', 2009, 20000, 2);
+    (
+        'Ford',
+        'Fusion 2.5L I-VCT Flex Aut.',
+        '2016 Gasolina',
+        '20000',
+        2
+    );
 
 INSERT INTO
     Vehicles (Brand, Model, Year, Value, Owner_id)
 VALUES
-    ('Ford', 'Ka', 2009, 30000, 1);
+    (
+        'Ford',
+        'Ka 1.0 8V/1.0 8V ST Flex 3p',
+        '2013 Gasolina',
+        '30000',
+        1
+    );

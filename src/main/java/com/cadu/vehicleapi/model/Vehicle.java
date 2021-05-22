@@ -15,15 +15,15 @@ public class Vehicle {
     public long id;
     public String brand;
     public String model;
-    public int year;
-    public long value;
+    public String year;
+    public String value;
     @ManyToOne
     public User owner;
 
     public Vehicle() {
     }
 
-    public Vehicle(String brand, String model, int year, long value, User owner) {
+    public Vehicle(String brand, String model, String year, String value, User owner) {
         this.brand = brand;
         this.model = model;
         this.year = year;

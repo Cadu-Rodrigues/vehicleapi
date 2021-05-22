@@ -8,8 +8,8 @@ import com.cadu.vehicleapi.model.Vehicle;
 public class VehicleDTO {
     public String brand;
     public String model;
-    public int year;
-    public long value;
+    public String year;
+    public String value;
     public int ownerCPF;
 
     public VehicleDTO(Vehicle vehicle) {

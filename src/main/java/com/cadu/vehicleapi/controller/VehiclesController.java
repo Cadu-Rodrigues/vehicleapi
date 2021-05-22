@@ -16,6 +16,7 @@ import com.cadu.vehicleapi.controller.Form.VehicleForm;
 import com.cadu.vehicleapi.model.Vehicle;
 import com.cadu.vehicleapi.repository.UsersRepository;
 import com.cadu.vehicleapi.repository.VehiclesRepository;
+import com.cadu.vehicleapi.service.VehicleService;
 
 @RestController
 public class VehiclesController {
@@ -35,6 +36,8 @@ public class VehiclesController {
     @PostMapping("/vehicles")
     public ResponseEntity<VehicleDTO> createVehicle(@RequestBody VehicleForm form, UriComponentsBuilder uriBuilder) {
         Vehicle vehicle = form.convert(form, userRepository);
+        VehicleService service = new VehicleService();
+        vehicle.value = service.getVehicleValue(vehicle);
         this.repository.save(vehicle);
         URI uri = uriBuilder.path("/vehicles/{id}").buildAndExpand(vehicle.id).toUri();
         return ResponseEntity.created(uri).body(new VehicleDTO(vehicle));
