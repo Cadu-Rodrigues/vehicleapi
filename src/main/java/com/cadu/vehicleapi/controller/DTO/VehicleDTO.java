@@ -20,7 +20,7 @@ public class VehicleDTO {
             iterate.model = vehicles.get(i).model;
             iterate.year = vehicles.get(i).year;
             iterate.value = vehicles.get(i).value;
-            iterate.ownerCPF = vehicles.get(i).ownerCPF;
+            iterate.ownerCPF = vehicles.get(i).owner.CPF;
             array.add(iterate);
         }
         return array;
