@@ -23,7 +23,7 @@ public class VehiclesFromUserController {
     private VehiclesRepository vehiclesRepository;
 
     @GetMapping("/vehiclesUser/{cpf}")
-    public VehiclesFromUserDTO listVehiclesUser(@PathVariable int cpf) {
+    public VehiclesFromUserDTO listVehiclesUser(@PathVariable int cpf) throws Exception {
         UserDTO dto = new UserDTO();
         User user = usersRepository.findByCPF(cpf);
         List<Vehicle> vehicles = vehiclesRepository.findByOwner_CPF(cpf);

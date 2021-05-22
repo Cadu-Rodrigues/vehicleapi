@@ -1,5 +1,10 @@
 package com.cadu.vehicleapi.service;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.format.TextStyle;
+
+import com.cadu.vehicleapi.controller.DTO.VehicleDTO;
 import com.cadu.vehicleapi.model.Vehicle;
 import com.cadu.vehicleapi.service.model.Brand;
 import com.cadu.vehicleapi.service.model.FipeReturnValue;
@@ -7,6 +12,7 @@ import com.cadu.vehicleapi.service.model.Model;
 import com.cadu.vehicleapi.service.model.ModelAndYear;
 import com.cadu.vehicleapi.service.model.Year;
 
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
@@ -77,6 +83,29 @@ public class VehicleService {
                 result = years[i].codigo;
         }
         return result;
+    }
+
+    public String getRodizioDay(Vehicle vehicle) throws Exception {
+        String words[] = vehicle.year.split(" ");
+        String year = words[0];
+        if (year.substring(year.length() - 1).equals("0") || year.substring(year.length() - 1).equals("1"))
+            return DayOfWeek.MONDAY.getDisplayName(TextStyle.FULL, LocaleContextHolder.getLocale());
+        if (year.substring(year.length() - 1).equals("2") || year.substring(year.length() - 1).equals("3"))
+            return DayOfWeek.TUESDAY.getDisplayName(TextStyle.FULL, LocaleContextHolder.getLocale());
+        if (year.substring(year.length() - 1).equals("4") || year.substring(year.length() - 1).equals("5"))
+            return DayOfWeek.WEDNESDAY.getDisplayName(TextStyle.FULL, LocaleContextHolder.getLocale());
+        if (year.substring(year.length() - 1).equals("6") || year.substring(year.length() - 1).equals("7"))
+            return DayOfWeek.THURSDAY.getDisplayName(TextStyle.FULL, LocaleContextHolder.getLocale());
+        if (year.substring(year.length() - 1).equals("8") || year.substring(year.length() - 1).equals("9"))
+            return DayOfWeek.FRIDAY.getDisplayName(TextStyle.FULL, LocaleContextHolder.getLocale());
+        throw new Exception("Vehicle has an invalid year: " + vehicle.year);
+    }
+
+    public Boolean getRodizioAtive(VehicleDTO vehicle, LocalDate now) {
+        DayOfWeek dayOfWeek = now.getDayOfWeek();
+        if (dayOfWeek.getDisplayName(TextStyle.FULL, LocaleContextHolder.getLocale()).equals(vehicle.rodizioDay))
+            return true;
+        return false;
     }
 
 }

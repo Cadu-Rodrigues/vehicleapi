@@ -27,14 +27,15 @@ public class VehiclesController {
     private UsersRepository userRepository;
 
     @GetMapping("/vehicles")
-    public List<VehicleDTO> listVehicles() {
+    public List<VehicleDTO> listVehicles() throws Exception {
         VehicleDTO dto = new VehicleDTO();
         List<Vehicle> vehicles = repository.findAll();
         return dto.convert(vehicles);
     }
 
     @PostMapping("/vehicles")
-    public ResponseEntity<VehicleDTO> createVehicle(@RequestBody VehicleForm form, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<VehicleDTO> createVehicle(@RequestBody VehicleForm form, UriComponentsBuilder uriBuilder)
+            throws Exception {
         Vehicle vehicle = form.convert(form, userRepository);
         VehicleService service = new VehicleService();
         vehicle.value = service.getVehicleValue(vehicle);

@@ -10,7 +10,7 @@ public class VehiclesFromUserDTO {
     public String ownerName;
     public List<VehicleDTO> vehicles;
 
-    public VehiclesFromUserDTO(List<Vehicle> vehicles, User user) {
+    public VehiclesFromUserDTO(List<Vehicle> vehicles, User user) throws Exception {
         this.vehicles = new ArrayList<VehicleDTO>();
         for (int i = 0; i < vehicles.size(); i++) {
             VehicleDTO dto = new VehicleDTO();
