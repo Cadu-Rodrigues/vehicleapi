@@ -25,7 +25,6 @@ public class VehiclesFromUserController {
     @GetMapping("/vehiclesUser/{cpf}")
     public VehiclesFromUserDTO listVehiclesUser(@PathVariable int cpf) {
         UserDTO dto = new UserDTO();
-        VehicleDTO vehicledto = new VehicleDTO();
         User user = usersRepository.findByCPF(cpf);
         List<Vehicle> vehicles = vehiclesRepository.findByOwner_CPF(cpf);
         VehiclesFromUserDTO result = new VehiclesFromUserDTO(vehicles, user);
