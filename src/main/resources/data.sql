@@ -16,7 +16,7 @@ CREATE TABLE Vehicles (
     Model VARCHAR(250),
     Year INT(4),
     Value DECIMAL,
-    Ownerid INT
+    Owner_id INT
 );
 
 INSERT INTO
@@ -50,16 +50,16 @@ VALUES
     );
 
 INSERT INTO
-    Vehicles (Brand, Model, Year, Value, Ownerid)
+    Vehicles (Brand, Model, Year, Value, Owner_id)
 VALUES
     ('Ford', 'Fiesta', 2009, 10000, 1);
 
 INSERT INTO
-    Vehicles (Brand, Model, Year, Value, Ownerid)
+    Vehicles (Brand, Model, Year, Value, Owner_id)
 VALUES
     ('Ford', 'Fusion', 2009, 20000, 2);
 
 INSERT INTO
-    Vehicles (Brand, Model, Year, Value, Ownerid)
+    Vehicles (Brand, Model, Year, Value, Owner_id)
 VALUES
     ('Ford', 'Ka', 2009, 30000, 1);
