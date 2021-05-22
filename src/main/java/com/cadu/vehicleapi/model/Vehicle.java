@@ -23,4 +23,12 @@ public class Vehicle {
     public Vehicle() {
     }
 
+    public Vehicle(String brand, String model, int year, long value, User owner) {
+        this.brand = brand;
+        this.model = model;
+        this.year = year;
+        this.value = value;
+        this.owner = owner;
+    }
+
 }

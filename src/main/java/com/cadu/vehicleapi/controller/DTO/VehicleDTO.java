@@ -12,6 +12,18 @@ public class VehicleDTO {
     public long value;
     public int ownerCPF;
 
+    public VehicleDTO(Vehicle vehicle) {
+        this.brand = vehicle.brand;
+        this.model = vehicle.model;
+        this.year = vehicle.year;
+        this.value = vehicle.value;
+        this.ownerCPF = vehicle.owner.CPF;
+    }
+
+    public VehicleDTO() {
+
+    }
+
     public List<VehicleDTO> convert(List<Vehicle> vehicles) {
         List<VehicleDTO> array = new ArrayList<VehicleDTO>();
         for (int i = 0; i < vehicles.size(); i++) {
