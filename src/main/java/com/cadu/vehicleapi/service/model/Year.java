@@ -1,4 +1,4 @@
-package com.cadu.vehicleapi.service;
+package com.cadu.vehicleapi.service.model;
 
 public class Year {
     public String nome;

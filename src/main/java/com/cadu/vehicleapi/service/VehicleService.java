@@ -1,6 +1,11 @@
 package com.cadu.vehicleapi.service;
 
 import com.cadu.vehicleapi.model.Vehicle;
+import com.cadu.vehicleapi.service.model.Brand;
+import com.cadu.vehicleapi.service.model.FipeReturnValue;
+import com.cadu.vehicleapi.service.model.Model;
+import com.cadu.vehicleapi.service.model.ModelAndYear;
+import com.cadu.vehicleapi.service.model.Year;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
