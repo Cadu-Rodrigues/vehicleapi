@@ -3,6 +3,8 @@ package com.cadu.vehicleapi.controller;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,8 +36,8 @@ public class VehiclesController {
     }
 
     @PostMapping("/vehicles")
-    public ResponseEntity<VehicleDTO> createVehicle(@RequestBody VehicleForm form, UriComponentsBuilder uriBuilder)
-            throws Exception {
+    public ResponseEntity<VehicleDTO> createVehicle(@RequestBody @Valid VehicleForm form,
+            UriComponentsBuilder uriBuilder) throws Exception {
         Vehicle vehicle = form.convert(form, userRepository);
         VehicleService service = new VehicleService();
         vehicle.value = service.getVehicleValue(vehicle);

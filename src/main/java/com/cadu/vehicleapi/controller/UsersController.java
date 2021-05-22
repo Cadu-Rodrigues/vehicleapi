@@ -9,6 +9,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import com.cadu.vehicleapi.controller.DTO.UserDTO;
 import com.cadu.vehicleapi.controller.Form.UserForm;
 import com.cadu.vehicleapi.model.User;
@@ -29,7 +31,7 @@ public class UsersController {
     }
 
     @PostMapping("/users")
-    public ResponseEntity<UserDTO> createUser(@RequestBody UserForm form, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<UserDTO> createUser(@RequestBody @Valid UserForm form, UriComponentsBuilder uriBuilder) {
         User user = form.convert(form);
         this.repository.save(user);
         URI uri = uriBuilder.path("/users/{id}").buildAndExpand(user.id).toUri();
