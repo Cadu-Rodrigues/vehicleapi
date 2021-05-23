@@ -12,12 +12,28 @@ import com.cadu.vehicleapi.service.model.Model;
 import com.cadu.vehicleapi.service.model.ModelAndYear;
 import com.cadu.vehicleapi.service.model.Year;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+@Service
 public class VehicleService {
-    RestTemplate restTemplate = new RestTemplate();
+    @Autowired
+    public RestTemplate restTemplate;
+
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
+
+    public VehicleService() {
+        this.restTemplate = new RestTemplate();
+    }
+
+    private final String baseURL = "https://parallelum.com.br/fipe/api/v1/carros/marcas";
 
     public String getVehicleValue(Vehicle vehicle) throws Exception {
         String brandCode = "";
@@ -30,18 +46,16 @@ public class VehicleService {
         } catch (IllegalArgumentException exception) {
             throw new Exception(exception);
         }
-        String url = "https://parallelum.com.br/fipe/api/v1/carros/marcas/" + brandCode + "/modelos/" + modelCode
-                + "/anos/" + year;
+        String url = baseURL + "/" + brandCode + "/modelos/" + modelCode + "/anos/" + year;
         FipeReturnValue result = restTemplate.getForObject(url, FipeReturnValue.class);
-        return result.Valor;
+        return result.valor;
     }
 
     public String getBrandCode(String brandName) throws IllegalArgumentException {
         String result = "";
         if (brandName == "")
             throw new IllegalArgumentException("Brand name is invalid");
-        ResponseEntity<Brand[]> response = this.restTemplate
-                .getForEntity("https://parallelum.com.br/fipe/api/v1/carros/marcas", Brand[].class);
+        ResponseEntity<Brand[]> response = restTemplate.getForEntity(baseURL, Brand[].class);
         Brand brands[] = response.getBody();
         for (int i = 0; i < brands.length; i++) {
             if (brands[i].nome.equals(brandName))
@@ -54,12 +68,12 @@ public class VehicleService {
 
     public String getModelCode(String brandCode, String modelName) throws IllegalArgumentException {
         String result = "";
-        String URL = "https://parallelum.com.br/fipe/api/v1/carros/marcas/" + brandCode + "/modelos";
+        String URL = baseURL + "/" + brandCode + "/modelos";
         if (brandCode == "")
             throw new IllegalArgumentException("Brand name is invalid");
         if (modelName == "")
             throw new IllegalArgumentException("Model name is invalid");
-        ModelAndYear response = this.restTemplate.getForObject(URL, ModelAndYear.class);
+        ModelAndYear response = restTemplate.getForObject(URL, ModelAndYear.class);
         Model models[] = response.modelos;
         for (int i = 0; i < models.length; i++) {
             if (models[i].nome.equals(modelName))
@@ -72,15 +86,14 @@ public class VehicleService {
 
     public String getYear(String brandCode, String modelCode, String carYear) throws IllegalArgumentException {
         String result = "";
-        String URL = "https://parallelum.com.br/fipe/api/v1/carros/marcas/" + brandCode + "/modelos/" + modelCode
-                + "/anos";
+        String URL = baseURL + "/" + brandCode + "/modelos/" + modelCode + "/anos";
         if (brandCode == "")
             throw new IllegalArgumentException("Brand name invalid");
         if (modelCode == "")
             throw new IllegalArgumentException("Model name is invalid");
         if (carYear == "")
             throw new IllegalArgumentException("Vehicle year is invalid");
-        ResponseEntity<Year[]> response = this.restTemplate.getForEntity(URL, Year[].class);
+        ResponseEntity<Year[]> response = restTemplate.getForEntity(URL, Year[].class);
         Year years[] = response.getBody();
         for (int i = 0; i < years.length; i++) {
             if (years[i].nome.equals(carYear))
@@ -91,7 +104,7 @@ public class VehicleService {
         return result;
     }
 
-    public String getRodizioDay(Vehicle vehicle) throws Exception {
+    public String getRodizioDay(Vehicle vehicle) throws IllegalArgumentException {
         String words[] = vehicle.year.split(" ");
         String year = words[0];
         if (year.substring(year.length() - 1).equals("0") || year.substring(year.length() - 1).equals("1"))
@@ -104,14 +117,12 @@ public class VehicleService {
             return DayOfWeek.THURSDAY.getDisplayName(TextStyle.FULL, LocaleContextHolder.getLocale());
         if (year.substring(year.length() - 1).equals("8") || year.substring(year.length() - 1).equals("9"))
             return DayOfWeek.FRIDAY.getDisplayName(TextStyle.FULL, LocaleContextHolder.getLocale());
-        throw new Exception("Vehicle has an invalid year: " + vehicle.year);
+        throw new IllegalArgumentException("Vehicle has an invalid year: " + vehicle.year);
     }
 
     public Boolean getRodizioAtive(VehicleDTO vehicle, LocalDate now) {
         DayOfWeek dayOfWeek = now.getDayOfWeek();
-        if (dayOfWeek.getDisplayName(TextStyle.FULL, LocaleContextHolder.getLocale()).equals(vehicle.rodizioDay))
-            return true;
-        return false;
+        return dayOfWeek.getDisplayName(TextStyle.FULL, LocaleContextHolder.getLocale()).equals(vehicle.rodizioDay);
     }
 
 }
