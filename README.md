@@ -19,5 +19,5 @@ Return all vehicles owned by that user
 All entities referenced here were build based on https://deividfortuna.github.io/fipe/ API, consult for further aknowledge
 
 ```
-/mvnw spring-boot:run
+./mvnw spring-boot:run
 ```
