@@ -12,10 +12,8 @@ public class VehiclesFromUserDTO {
 
     public VehiclesFromUserDTO(List<Vehicle> vehicles, User user) throws Exception {
         this.vehicles = new ArrayList<VehicleDTO>();
-        for (int i = 0; i < vehicles.size(); i++) {
-            VehicleDTO dto = new VehicleDTO();
-            this.vehicles = dto.convert(vehicles);
-        }
+        VehicleDTO dto = new VehicleDTO();
+        this.vehicles = dto.convert(vehicles);
         this.ownerName = user.name;
     }
 }
