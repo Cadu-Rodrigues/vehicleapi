@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface VehiclesRepository extends JpaRepository<Vehicle, Long> {
 
-    List<Vehicle> findByOwner_CPF(int cpf);
+    List<Vehicle> findByOwnerCPF(int cpf);
 
 }

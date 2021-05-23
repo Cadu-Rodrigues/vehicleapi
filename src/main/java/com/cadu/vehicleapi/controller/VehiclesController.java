@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.cadu.vehicleapi.controller.DTO.VehicleDTO;
+import com.cadu.vehicleapi.controller.DTO.mapper.VehicleMapper;
 import com.cadu.vehicleapi.controller.Form.VehicleForm;
 import com.cadu.vehicleapi.model.Vehicle;
 import com.cadu.vehicleapi.repository.UsersRepository;
@@ -30,9 +31,9 @@ public class VehiclesController {
 
     @GetMapping("/vehicles")
     public List<VehicleDTO> listVehicles() throws Exception {
-        VehicleDTO dto = new VehicleDTO();
+        VehicleMapper mapper = new VehicleMapper();
         List<Vehicle> vehicles = repository.findAll();
-        return dto.convert(vehicles);
+        return mapper.convert(vehicles);
     }
 
     @PostMapping("/vehicles")

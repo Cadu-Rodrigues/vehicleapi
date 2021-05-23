@@ -12,6 +12,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import com.cadu.vehicleapi.controller.DTO.UserDTO;
+import com.cadu.vehicleapi.controller.DTO.mapper.UserMapper;
 import com.cadu.vehicleapi.controller.Form.UserForm;
 import com.cadu.vehicleapi.model.User;
 import com.cadu.vehicleapi.repository.UsersRepository;
@@ -26,8 +27,8 @@ public class UsersController {
     @GetMapping("/users")
     public List<UserDTO> listUsers() {
         List<User> users = repository.findAll();
-        UserDTO dto = new UserDTO();
-        return dto.convert(users);
+        UserMapper mapper = new UserMapper();
+        return mapper.convert(users);
     }
 
     @PostMapping("/users")

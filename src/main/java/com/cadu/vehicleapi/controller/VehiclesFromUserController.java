@@ -3,7 +3,6 @@ package com.cadu.vehicleapi.controller;
 import java.util.List;
 
 import com.cadu.vehicleapi.controller.DTO.UserDTO;
-import com.cadu.vehicleapi.controller.DTO.VehicleDTO;
 import com.cadu.vehicleapi.controller.DTO.VehiclesFromUserDTO;
 import com.cadu.vehicleapi.model.User;
 import com.cadu.vehicleapi.model.Vehicle;
@@ -26,7 +25,7 @@ public class VehiclesFromUserController {
     public VehiclesFromUserDTO listVehiclesUser(@PathVariable int cpf) throws Exception {
         UserDTO dto = new UserDTO();
         User user = usersRepository.findByCPF(cpf);
-        List<Vehicle> vehicles = vehiclesRepository.findByOwner_CPF(cpf);
+        List<Vehicle> vehicles = vehiclesRepository.findByOwnerCPF(cpf);
         VehiclesFromUserDTO result = new VehiclesFromUserDTO(vehicles, user);
         return result;
     }
